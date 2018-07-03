@@ -19,7 +19,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <img id="otp-logo" src="otp-logo-w-b.svg" />
+          <img id="otp-logo" src="otp-logo-w-b.png" />
 
           <ul className="nav">
             <li><NavLink to="/">Home</NavLink></li>
