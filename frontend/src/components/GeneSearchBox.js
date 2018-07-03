@@ -8,6 +8,8 @@ import ListItem from '@material-ui/core/ListItem';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 class GeneSearchBox extends React.Component {
 
   constructor(props) {
@@ -83,7 +85,7 @@ class GeneSearchBox extends React.Component {
                                 fontWeight: highlightedIndex === index ? 'bold' : 'normal',
                               }}
                             >
-                              {item.disease_label}
+                            <Link to={`/diseases/${item.disease_id}`}>{item.disease_label}</Link>
                             </ListItem>
                           )
                         )
