@@ -2,18 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
 .App-title {
   font-size: 1.5em;
 }
@@ -25,4 +13,54 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+html {
+  min-height: 100%;
+  background-size: cover;
+  background-repeat:no-repeat;
+  background: rgba(38,148,38,1);
+  background: -moz-linear-gradient(top, rgba(38,148,38,1) 0%, rgba(38,148,38,1) 38%, rgba(255,255,255,1) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(38,148,38,1)), color-stop(38%, rgba(38,148,38,1)), color-stop(100%, rgba(255,255,255,1)));
+  background: -webkit-linear-gradient(top, rgba(38,148,38,1) 0%, rgba(38,148,38,1) 38%, rgba(255,255,255,1) 100%);
+  background: -o-linear-gradient(top, rgba(38,148,38,1) 0%, rgba(38,148,38,1) 38%, rgba(255,255,255,1) 100%);
+  background: -ms-linear-gradient(top, rgba(38,148,38,1) 0%, rgba(38,148,38,1) 38%, rgba(255,255,255,1) 100%);
+  background: linear-gradient(to bottom, rgba(38,148,38,1) 0%, rgba(38,148,38,1) 38%, rgba(255,255,255,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#269426', endColorstr='#ffffff', GradientType=0 );
+}
+
+#graph {
+  background: white;
+  clear: both;
+}
+/* body { */
+/*   font-size: 24px; */
+/* } */
+
+#otp-logo {
+  width: 500px;
+  display: block;
+  margin: 50px auto;
+}
+
+ul.nav {
+  list-style: none;
+  clear: both;
+  width: 32em;
+  margin: 0 auto;
+}
+
+ul.nav li {
+  float: left;
+  width: 7em;
+  margin: 2em 0.4em;
+}
+
+ul.nav a {
+  text-decoration: none;
+  color: white;
+}
+
+ul.nav a:hover {
+  text-decoration: underline;
 }

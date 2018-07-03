@@ -3,6 +3,7 @@ import React from 'react';
 
 import Downshift from 'downshift';
 import List from '@material-ui/core/List';
+import TextField from '@material-ui/core/TextField';
 import ListItem from '@material-ui/core/ListItem';
 
 import { Query } from 'react-apollo';
@@ -10,6 +11,8 @@ import gql from 'graphql-tag';
 
 import DiseaseInfo from './DiseaseInfo';
 import DrugInfo from './DrugInfo';
+
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class DiseaseSearchBox extends React.Component {
 
@@ -71,8 +74,7 @@ class DiseaseSearchBox extends React.Component {
           selectedItem,
         }) => (
           <div>
-            <label {...getLabelProps()}>Disease: </label>
-            <input {...getInputProps( {placeholder: 'Disease name'})} />
+            <TextField {...getInputProps( {placeholder: 'Disease or drug', fontSize: "2rem"} )} />
             { isOpen ? (
               <Query
                 skip={!inputValue}
@@ -82,6 +84,8 @@ class DiseaseSearchBox extends React.Component {
                 { ( {loading, error, data} ) => {
                   if ( loading ) return 'Loading...';
                   if ( error ) return `Error: ${error.message}`;
+    
+                  if ( ! data ) return '';
 
                   const mergedData = [
                     ...data.DiseasesBySubstring,
@@ -101,7 +105,9 @@ class DiseaseSearchBox extends React.Component {
                                 fontWeight: highlightedIndex === index ? 'bold' : 'normal',
                               }}
                             >
-                              {item.disease_id ? item.disease_label : item.chembl_id}
+                              <Link to={`/diseases/${item.disease_id}`}>
+                                {item.disease_label}
+                              </Link>
                             </ListItem>
                           )
                         ) }
