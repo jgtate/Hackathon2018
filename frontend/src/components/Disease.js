@@ -64,7 +64,7 @@ class Disease extends React.Component {
                     <ul>
                     {
                       ensId.interesting.map( (drug, i) => {
-                      return <li key={drug.chembl_id}>{drug.chembl_id}</li>
+                        return <Chip key={drug.chembl_id} label={(i+1).toString() + ': ' + drug.chembl_id} style={{  color: 'black', margin: '4px' }} />
                     })
                     }
                     </ul>
