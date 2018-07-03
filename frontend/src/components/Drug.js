@@ -30,9 +30,10 @@ class DrugId extends React.Component {
                   data.Drug.map( (ensId, i) => {
                     console.log('ensId: ', ensId);
                     const ss = 'MATCH q=(drug1:Drug {chembl_id:"' + ensId.chembl_id + '"})-[]-(target1:Gene )-[]-()-[]-(target2:Gene)<-[:TARGETS]-(drug2:Drug)-[]-(disease1:Disease) RETURN q LIMIT 20'
-                    return <div>
+                    return <div key={ensId.chembl_id}>
                     <h1>{ensId.chembl_id}</h1>
-                    <h2>Opportunity Score: 10</h2>
+                    <h2>Opportunity Score: {ensId.pagerank.toFixed(2)}</h2>
+                    <h2>{ensId.betweenness ? `Interconnectivity: ${ensId.betweenness.toFixed(2)}` : ''}</h2>
                     <Neo4jGraphRenderer key={ensId.disease_id} url="http://35.196.230.196:7474"
                     user="neo4j"
                     password="cosmicrocks"
@@ -61,6 +62,8 @@ const queries = {
     query GetDrug($q: String) {
       Drug(chembl_id: $q, first: 5) {
         chembl_id
+        pagerank
+        betweenness
       }
     }
   `,
