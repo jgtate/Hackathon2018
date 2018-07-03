@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { NavLink } from 'react-router-dom'
 
+import logo from './otp-logo-w-b.png';
+
 import Home from './components/home';
 
 import EnsIds from './components/EnsIds';
@@ -19,7 +21,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <img id="otp-logo" src="otp-logo-w-b.png" />
+          <img id="otp-logo" src={logo} />
 
           <ul className="nav">
             <li><NavLink to="/">Home</NavLink></li>
