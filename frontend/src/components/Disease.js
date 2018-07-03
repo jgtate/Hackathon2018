@@ -13,6 +13,9 @@ import Switch from '@material-ui/core/Switch';
 
 import { Neo4jGraphRenderer } from 'neo4j-graph-renderer';
 
+import LinearProgress from '@material-ui/core/LinearProgress';
+
+
 class Disease extends React.Component {
 
   constructor(props) {
@@ -36,7 +39,7 @@ class Disease extends React.Component {
         {
           ( {loading, error, data} ) => {
             console.log(data)
-            if ( loading ) return 'Loading...';
+            if ( loading ) return <LinearProgress />;
             if ( error ) return `Error: ${error.message}`;
 
             return (
@@ -56,8 +59,15 @@ class Disease extends React.Component {
                     return <div>
                     <h1>{ensId.disease_label}</h1>
                     <Chip label={ensId.is_unmet ? 'Unmet need' : 'Has existing drugs'} style={{ backgroundColor: ensId.is_unmet ? 'red' : 'green', color: ensId.is_unmet ? 'white' : 'white' }} />
-
                     <h4>Intact Score: {this.state.value} (slide to change)</h4>
+                    <h2>Most repurposable drugs for {ensId.disease_label}</h2>
+                    <ul>
+                    {
+                      ensId.interesting.map( (drug, i) => {
+                      return <li key={drug.chembl_id}>{drug.chembl_id}</li>
+                    })
+                    }
+                    </ul>
                     <Slider value={this.state.value}  min={0} max={1} step={0.1} aria-labelledby="label" onChange={this.handleChange} />
                     <Neo4jGraphRenderer key={ensId.disease_id} url="http://35.196.230.196:7474"
                     user="neo4j"
@@ -89,6 +99,9 @@ const queries = {
         disease_id
         disease_label
         is_unmet
+        interesting {
+          chembl_id
+        }
       }
     }
   `,
