@@ -6,6 +6,8 @@ import gql from 'graphql-tag';
 import { Query } from "react-apollo";
 import { withRouter } from 'react-router'
 
+import { Neo4jGraphRenderer } from 'neo4j-graph-renderer';
+
 class Disease extends React.Component {
 
   constructor(props) {
@@ -27,7 +29,11 @@ class Disease extends React.Component {
                 {
                   data.Disease.map( (ensId, i) => {
                     console.log('ensId: ', ensId);
-                    return <li key={ensId.disease_id}>{ensId.disease_label}</li>;
+                    const ss = 'MATCH q=(disease1:Disease {disease_id: "' + ensId.disease_id + '"})--(t1:Gene)--(u1:Uniprot)-[i:INTERACTION]-(u2:Uniprot)--(t2:Gene)--(d1:Drug) WHERE i.intact_score >= 0.6 RETURN q LIMIT 100'
+                    return <Neo4jGraphRenderer key={ensId.ensembl_gene_id} url="http://35.196.230.196:7474"
+                    user="neo4j"
+                    password="cosmicrocks"
+                    query={ss}/>
                   })
                 }
               </ul>
