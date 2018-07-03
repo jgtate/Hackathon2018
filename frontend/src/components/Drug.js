@@ -27,7 +27,11 @@ class DrugId extends React.Component {
                 {
                   data.Drug.map( (ensId, i) => {
                     console.log('ensId: ', ensId);
-                    return <li key={ensId.chembl_id}>{ensId.chembl_id}</li>;
+                    return <div>
+                    <h2>Opportunity Score: 10</h2>
+                    <h1>{ensId.chembl_id}</h1>
+                    <li key={ensId.chembl_id}>{ensId.chembl_id}</li>
+                    </div>
                   })
                 }
               </ul>

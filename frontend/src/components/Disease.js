@@ -6,12 +6,24 @@ import gql from 'graphql-tag';
 import { Query } from "react-apollo";
 import { withRouter } from 'react-router'
 
+import Slider from '@material-ui/lab/Slider';
+
 import { Neo4jGraphRenderer } from 'neo4j-graph-renderer';
 
 class Disease extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+
+
+  state = {
+    value: 0.6,
+  };
+
+  handleChange = (event, value) => {
+    console.log(event, value)
+    this.setState({ value });
   }
 
   render = () => {
@@ -29,11 +41,17 @@ class Disease extends React.Component {
                 {
                   data.Disease.map( (ensId, i) => {
                     console.log('ensId: ', ensId);
-                    const ss = 'MATCH q=(disease1:Disease {disease_id: "' + ensId.disease_id + '"})--(t1:Gene)--(u1:Uniprot)-[i:INTERACTION]-(u2:Uniprot)--(t2:Gene)--(d1:Drug) WHERE i.intact_score >= 0.6 RETURN q LIMIT 100'
-                    return <Neo4jGraphRenderer key={ensId.ensembl_gene_id} url="http://35.196.230.196:7474"
+                    const ss = 'MATCH q=(disease1:Disease {disease_id: "' + ensId.disease_id + '"})--(t1:Gene)--(u1:Uniprot)-[i:INTERACTION]-(u2:Uniprot)--(t2:Gene)--(d1:Drug) WHERE i.intact_score >= ' + this.state.value + ' RETURN q LIMIT 100'
+                    return <div>
+                    <h1>{ensId.disease_label}</h1>
+                    <h2>{ensId.is_unmet ? 'Unmet need' : 'Has existing drugs'}</h2>
+                    <h4>Intact Score: {this.state.value} (slide to change)</h4>
+                    <Slider value={this.state.value}  min={0} max={1} step={0.1} aria-labelledby="label" onChange={this.handleChange} />
+                    <Neo4jGraphRenderer key={ensId.disease_id} url="http://35.196.230.196:7474"
                     user="neo4j"
                     password="cosmicrocks"
                     query={ss}/>
+                    </div>
                   })
                 }
               </ul>
@@ -58,6 +76,7 @@ const queries = {
       Disease(disease_id: $q, first: 5) {
         disease_id
         disease_label
+        is_unmet
       }
     }
   `,

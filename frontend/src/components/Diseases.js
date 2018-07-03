@@ -27,7 +27,7 @@ class DiseaseIds extends React.Component {
                   data.Disease.map( (ensId, i) => {
                     console.log('ensId: ', ensId);
 
-                    return <li key={ensId.disease_id}><Link to={`/diseases/${ensId.disease_id}`}>{ensId.disease_id}</Link></li>;
+                    return <li key={ensId.disease_id}><Link to={`/diseases/${ensId.disease_id}`}>{ensId.disease_label}</Link></li>;
                   })
                 }
               </ul>
@@ -48,6 +48,7 @@ const queries = {
     query GetDiseaseIds {
       Disease(first: 5) {
         disease_id
+        disease_label
       }
     }
   `,
