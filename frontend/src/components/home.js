@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
-import GeneSearchBox from './GeneSearchBox'
+import DiseaseSearchBox from './DiseaseSearchBox'
 
 const Home = () => {
   return (
     <div className="App">
-    <GeneSearchBox onSelect={(item) => { console.log(item) } }/>
+      <DiseaseSearchBox
+        onSelect={(item) => { console.log(item) } }
+      />
     </div>
     )
 }
