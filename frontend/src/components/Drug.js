@@ -6,6 +6,9 @@ import gql from 'graphql-tag';
 import { Query } from "react-apollo";
 import { withRouter } from 'react-router'
 
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+
 import { Neo4jGraphRenderer } from 'neo4j-graph-renderer';
 
 class DrugId extends React.Component {
@@ -26,6 +29,14 @@ class DrugId extends React.Component {
 
             return (
               <ul>
+              <FormControlLabel style={{float: 'right'}}
+                control={
+                  <Switch
+                  value="Toggle Graph"
+              />
+                }
+                label="Toggle Graph"
+              />
                 {
                   data.Drug.map( (ensId, i) => {
                     console.log('ensId: ', ensId);

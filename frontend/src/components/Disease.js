@@ -8,6 +8,8 @@ import { withRouter } from 'react-router'
 
 import Slider from '@material-ui/lab/Slider';
 import Chip from '@material-ui/core/Chip';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 import { Neo4jGraphRenderer } from 'neo4j-graph-renderer';
 
@@ -39,6 +41,14 @@ class Disease extends React.Component {
 
             return (
               <ul>
+              <FormControlLabel style={{float: 'right'}}
+                control={
+                  <Switch
+                  value="Toggle Graph"
+              />
+                }
+                label="Toggle Graph"
+              />
                 {
                   data.Disease.map( (ensId, i) => {
                     console.log('ensId: ', ensId);

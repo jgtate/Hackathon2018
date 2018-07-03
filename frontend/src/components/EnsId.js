@@ -4,7 +4,12 @@ import PropTypes from 'prop-types';
 
 import gql from 'graphql-tag';
 import { Query } from "react-apollo";
+
 import { withRouter } from 'react-router'
+
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+
 import { Neo4jGraphRenderer } from 'neo4j-graph-renderer';
 
 
@@ -26,6 +31,14 @@ class EnsId extends React.Component {
 
             return (
               <ul>
+              <FormControlLabel style={{float: 'right'}}
+                control={
+                  <Switch
+                  value="Toggle Graph"
+              />
+                }
+                label="Toggle Graph"
+              />
                 {
                   data.Gene.map( (ensId, i) => {
                     console.log('ensId: ', ensId);
