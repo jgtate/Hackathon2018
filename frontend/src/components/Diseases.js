@@ -7,7 +7,7 @@ import { Query } from "react-apollo";
 
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-class EnsIds extends React.Component {
+class DiseaseIds extends React.Component {
 
   constructor(props) {
     super(props);
@@ -15,7 +15,7 @@ class EnsIds extends React.Component {
 
   render = () => {
     return (
-      <Query query={queries.ensIds}>
+      <Query query={queries.DiseaseIds}>
         {
           ( {loading, error, data} ) => {
             if ( loading ) return 'Loading...';
@@ -24,10 +24,10 @@ class EnsIds extends React.Component {
             return (
               <ul>
                 {
-                  data.Genes.map( (ensId, i) => {
+                  data.Disease.map( (ensId, i) => {
                     console.log('ensId: ', ensId);
 
-                    return <li key={ensId.ensembl_gene_id}><Link to={`/genes/${ensId.ensembl_gene_id}`}>{ensId.ensembl_gene_id}</Link></li>;
+                    return <li key={ensId.disease_id}><Link to={`/diseases/${ensId.disease_id}`}>{ensId.disease_id}</Link></li>;
                   })
                 }
               </ul>
@@ -39,19 +39,19 @@ class EnsIds extends React.Component {
   }
 }
 
-EnsIds.props = {
-  ensIds: PropTypes.object.isRequired,
+DiseaseIds.props = {
+  DiseaseIds: PropTypes.object.isRequired,
 };
 
 const queries = {
-  ensIds: gql`
-    query GetEnsIds {
-      Genes(first: 5) {
-        ensembl_gene_id
+  DiseaseIds: gql`
+    query GetDiseaseIds {
+      Disease(first: 5) {
+        disease_id
       }
     }
   `,
 }
 
-export default EnsIds;
+export default DiseaseIds;
 

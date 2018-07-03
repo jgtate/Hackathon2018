@@ -4,30 +4,30 @@ import PropTypes from 'prop-types';
 
 import gql from 'graphql-tag';
 import { Query } from "react-apollo";
+import { withRouter } from 'react-router'
 
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
-class EnsIds extends React.Component {
+class DrugId extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   render = () => {
+    console.log(this.props.match.params)
     return (
-      <Query query={queries.ensIds}>
+      <Query query={queries.drug} variables={{q: this.props.match.params.ChemblId}}>
         {
           ( {loading, error, data} ) => {
+            console.log(data)
             if ( loading ) return 'Loading...';
             if ( error ) return `Error: ${error.message}`;
 
             return (
               <ul>
                 {
-                  data.Genes.map( (ensId, i) => {
+                  data.Drug.map( (ensId, i) => {
                     console.log('ensId: ', ensId);
-
-                    return <li key={ensId.ensembl_gene_id}><Link to={`/genes/${ensId.ensembl_gene_id}`}>{ensId.ensembl_gene_id}</Link></li>;
+                    return <li key={ensId.chembl_id}>{ensId.chembl_id}</li>;
                   })
                 }
               </ul>
@@ -39,19 +39,22 @@ class EnsIds extends React.Component {
   }
 }
 
-EnsIds.props = {
-  ensIds: PropTypes.object.isRequired,
+const RoutedDrugId = withRouter(DrugId)
+
+DrugId.props = {
+  chemblId: PropTypes.object.isRequired,
+  drug: PropTypes.object.isRequired,
 };
 
 const queries = {
-  ensIds: gql`
-    query GetEnsIds {
-      Genes(first: 5) {
-        ensembl_gene_id
+  drug: gql`
+    query GetDrug($q: String) {
+      Drug(chembl_id: $q, first: 5) {
+        chembl_id
       }
     }
   `,
 }
 
-export default EnsIds;
+export default RoutedDrugId;
 
