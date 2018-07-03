@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import gql from 'graphql-tag';
 import { Query } from "react-apollo";
 import { withRouter } from 'react-router'
+import { Neo4jGraphRenderer } from 'neo4j-graph-renderer';
+
 
 class EnsId extends React.Component {
 
@@ -27,7 +29,12 @@ class EnsId extends React.Component {
                 {
                   data.Gene.map( (ensId, i) => {
                     console.log('ensId: ', ensId);
-                    return <li key={ensId.ensembl_gene_id}>{ensId.ensembl_gene_id}</li>;
+                    const ss = 'MATCH q=(drug1:Drug)-[]-(target1:Gene {ensembl_gene_id: "' + ensId.ensembl_gene_id + '"})-[]-()-[]-(target2:Gene)<-[:TARGETS]-(drug2:Drug) RETURN q LIMIT 50'
+                    console.log(ss)
+                    return <Neo4jGraphRenderer key={ensId.ensembl_gene_id} url="http://35.196.230.196:7474"
+                    user="neo4j"
+                    password="cosmicrocks"
+                    query={ss}/>
                   })
                 }
               </ul>
