@@ -22,9 +22,9 @@ class EnsIds extends React.Component {
             return (
               <ul>
                 {
-                  this.props.ensIds.map( (ensId, i) => {
+                  data.Genes.map( (ensId, i) => {
                     console.log('ensId: ', ensId);
-                    return <li key={ensId}>{ensId}</li>;
+                    return <li key={ensId.ensembl_gene_id}>{ensId.ensembl_gene_id}</li>;
                   })
                 }
               </ul>
@@ -43,7 +43,7 @@ EnsIds.props = {
 const queries = {
   ensIds: gql`
     query GetEnsIds {
-      Gene(first:10) {
+      Genes(first: 5) {
         ensembl_gene_id
       }
     }
