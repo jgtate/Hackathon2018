@@ -17,16 +17,15 @@ class App extends Component {
     return (
       <Router>
       <div>
+
+      <NavLink to="/diseases">Diseases</NavLink>
+      <NavLink to="/genes">Genes</NavLink>
+      <NavLink to="/drugs">Drugs</NavLink>
         <Route exact path="/" component={Home}/>
-        <NavLink to="/genes">Genes</NavLink>
         <Route exact path="/genes" component={EnsIds}/>
         <Route path="/genes/:EnsId" component={EnsId}/>
-
-        <NavLink to="/drugs">Drugs</NavLink>
         <Route exact path="/drugs" component={Drugs}/>
         <Route path="/drugs/:ChemblId" component={Drug}/>
-
-        <NavLink to="/diseases">Diseases</NavLink>
         <Route exact path="/diseases" component={Diseases}/>
         <Route path="/diseases/:DiseaseId" component={Disease}/>
       </div>
