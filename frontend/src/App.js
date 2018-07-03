@@ -18,6 +18,7 @@ class App extends Component {
       <Router>
       <div>
 
+      <NavLink to="/">Home</NavLink>
       <NavLink to="/diseases">Diseases</NavLink>
       <NavLink to="/genes">Genes</NavLink>
       <NavLink to="/drugs">Drugs</NavLink>
