@@ -69,7 +69,7 @@ class Disease extends React.Component {
                     </ul>
                     <h4>Intact Score: {this.state.value} (slide to change)</h4>
                     <Slider value={this.state.value}  min={0} max={1} step={0.1} aria-labelledby="label" onChange={this.handleChange} />
-                    <Neo4jGraphRenderer key={ensId.disease_id} url="http://35.196.230.196:7474"
+                    <Neo4jGraphRenderer key={ensId.disease_id} url={process.env.REACT_APP_DB_URL}
                     user="neo4j"
                     password="cosmicrocks"
                     query={ss}/>

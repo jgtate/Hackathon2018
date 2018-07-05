@@ -44,7 +44,7 @@ class EnsId extends React.Component {
                     console.log('ensId: ', ensId);
                     const ss = 'MATCH q=(drug1:Drug)-[]-(target1:Gene {ensembl_gene_id: "' + ensId.ensembl_gene_id + '"})-[]-()-[]-(target2:Gene)<-[:TARGETS]-(drug2:Drug) RETURN q LIMIT 50'
                     console.log(ss)
-                    return <Neo4jGraphRenderer key={ensId.ensembl_gene_id} url="http://35.196.230.196:7474"
+                    return <Neo4jGraphRenderer key={ensId.ensembl_gene_id} url={process.env.DB_URL}
                     user="neo4j"
                     password="cosmicrocks"
                     query={ss}/>

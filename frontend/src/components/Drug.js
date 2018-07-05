@@ -45,7 +45,7 @@ class DrugId extends React.Component {
                     <h1>{ensId.chembl_id}</h1>
                     <h2>Opportunity Score: {ensId.pagerank.toFixed(2)}</h2>
                     <h2>{ensId.betweenness ? `Interconnectivity: ${ensId.betweenness.toFixed(2)}` : ''}</h2>
-                    <Neo4jGraphRenderer key={ensId.disease_id} url="http://35.196.230.196:7474"
+                    <Neo4jGraphRenderer key={ensId.disease_id} url={process.env.DB_URL}
                     user="neo4j"
                     password="cosmicrocks"
                     query={ss}/>
